@@ -93,7 +93,7 @@
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-genshin-gold selection:text-slate-900 overflow-x-hidden">
   <!-- Original fantasy landscape backdrop: floating islands, mountains and a distant Mondstadt-inspired city -->
-  <div aria-hidden="true" class="fixed inset-0 -z-10 overflow-hidden bg-[#101d35]">
+  <div id="backdropContainer" aria-hidden="true" class="fixed inset-0 -z-10 overflow-hidden bg-[#101d35]">
     <div class="absolute inset-0 bg-gradient-to-b from-[#172d50] via-[#273d59] to-[#111827]"></div>
     <div class="absolute inset-0 opacity-60" style="background:radial-gradient(circle at 18% 18%,rgba(255,226,164,.42),transparent 23%),radial-gradient(circle at 82% 22%,rgba(126,190,210,.28),transparent 25%)"></div>
     <svg class="absolute bottom-0 h-[70vh] min-h-[430px] w-full opacity-70" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMax slice">
@@ -474,7 +474,7 @@
     /* ===================================================================
        1. 10 CHIBI CHARACTERS DATA (A1 Level Words for 11-Year-Olds)
        =================================================================== */
-    const characters = [
+    const defaultCharacters = [
       {
         id: 'klee',
         name: 'Klee',
@@ -750,8 +750,11 @@
     ];
 
     /* ===================================================================
-       2. GLOBAL STATE
+       2. LOCALSTORAGE & GLOBAL STATE
        =================================================================== */
+    let characters = JSON.parse(localStorage.getItem('teyvat_guild_char_data')) || defaultCharacters;
+    let uploadedCharacterImages = JSON.parse(localStorage.getItem('teyvat_guild_char_photos')) || {};
+
     let currentCharacterIndex = 0;
     let primogems = 0;
     let isAudioEnabled = true;
@@ -766,8 +769,6 @@
     /* ===================================================================
        3. WEB AUDIO SYNTHESIZER
        =================================================================== */
-    // Create the audio context only after a user gesture. This avoids
-    // browsers suspending audio when the game is embedded in Google Sites.
     let audioCtx = null;
 
     function getAudioContext() {
@@ -791,10 +792,7 @@
       if (!isAudioEnabled) return;
 
       const ctx = getAudioContext();
-      if (!ctx) {
-        console.warn('Web Audio is not supported in this browser.');
-        return;
-      }
+      if (!ctx) return;
 
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
@@ -828,7 +826,6 @@
       const btn = document.getElementById('soundBtn');
 
       if (isAudioEnabled) {
-        // The click on this button is the user's gesture that unlocks audio.
         const ctx = getAudioContext();
         icon.className = 'fa-solid fa-volume-high text-genshin-gold';
         btn.querySelector('span').textContent = 'Sound ON';
@@ -843,6 +840,7 @@
        4. SETUP & RENDER TABS
        =================================================================== */
     window.addEventListener('DOMContentLoaded', () => {
+      loadSavedAppBackground();
       renderTabs();
       initWordBank();
       initSpeechRecognition();
@@ -906,7 +904,99 @@
     }
 
     /* ===================================================================
-       CARD EDITING FUNCTIONS
+       PERSISTENT LOCALSTORAGE BACKGROUND & CHARACTER IMAGES
+       =================================================================== */
+    function loadSavedAppBackground() {
+      const savedBg = localStorage.getItem('teyvat_guild_app_bg');
+      if (savedBg) {
+        applyAppBackground(savedBg);
+      }
+    }
+
+    const bgInput = document.getElementById('bgImageUpload');
+    const backdropContainer = document.getElementById('backdropContainer');
+
+    bgInput.addEventListener('change', (event) => {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      if (!file.type.startsWith('image/')) {
+        alert('Please select a valid image file for the background.');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64Image = reader.result;
+        applyAppBackground(base64Image);
+        localStorage.setItem('teyvat_guild_app_bg', base64Image);
+        playSound('success');
+      };
+      reader.readAsDataURL(file);
+      event.target.value = '';
+    });
+
+    function applyAppBackground(imgData) {
+      backdropContainer.style.backgroundImage = `url('${imgData}')`;
+      backdropContainer.style.backgroundSize = 'cover';
+      backdropContainer.style.backgroundPosition = 'center';
+      backdropContainer.style.backgroundRepeat = 'no-repeat';
+      Array.from(backdropContainer.children).forEach(child => {
+        child.style.opacity = '0';
+      });
+    }
+
+    function resetAppBackground() {
+      backdropContainer.style.backgroundImage = 'none';
+      Array.from(backdropContainer.children).forEach(child => {
+        child.style.opacity = '';
+      });
+      localStorage.removeItem('teyvat_guild_app_bg');
+      playSound('click');
+    }
+
+    function showCharacterImage(index) {
+      const photo = document.getElementById('characterPhoto');
+      const svg = document.getElementById('charSvg');
+      const savedImage = uploadedCharacterImages[index];
+
+      if (savedImage) {
+        photo.src = savedImage;
+        photo.classList.remove('hidden');
+        svg.classList.add('hidden');
+      } else {
+        photo.removeAttribute('src');
+        photo.classList.add('hidden');
+        svg.classList.remove('hidden');
+      }
+    }
+
+    document.getElementById('characterImageUpload').addEventListener('change', (event) => {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      if (!file.type.startsWith('image/')) {
+        alert('Please choose an image file.');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64Image = reader.result;
+        uploadedCharacterImages[currentCharacterIndex] = base64Image;
+        localStorage.setItem('teyvat_guild_char_photos', JSON.stringify(uploadedCharacterImages));
+        showCharacterImage(currentCharacterIndex);
+        playSound('success');
+      };
+      reader.readAsDataURL(file);
+      event.target.value = '';
+    });
+
+    document.getElementById('resetCharacterImage').addEventListener('click', () => {
+      delete uploadedCharacterImages[currentCharacterIndex];
+      localStorage.setItem('teyvat_guild_char_photos', JSON.stringify(uploadedCharacterImages));
+      showCharacterImage(currentCharacterIndex);
+      playSound('click');
+    });
+
+    /* ===================================================================
+       CARD EDITING FUNCTIONS (SAVED TO LOCALSTORAGE)
        =================================================================== */
     function toggleCardEditor() {
       playSound('click');
@@ -949,91 +1039,10 @@
         }
       }
 
+      localStorage.setItem('teyvat_guild_char_data', JSON.stringify(characters));
       renderTabs();
       renderCharacter(currentCharacterIndex);
       document.getElementById('cardEditorForm').classList.add('hidden');
-    }
-
-    /* ===================================================================
-       CHARACTER IMAGE UPLOAD
-       =================================================================== */
-    const uploadedCharacterImages = {};
-
-    function showCharacterImage(index) {
-      const photo = document.getElementById('characterPhoto');
-      const svg = document.getElementById('charSvg');
-      const savedImage = uploadedCharacterImages[index];
-
-      if (savedImage) {
-        photo.src = savedImage;
-        photo.classList.remove('hidden');
-        svg.classList.add('hidden');
-      } else {
-        photo.removeAttribute('src');
-        photo.classList.add('hidden');
-        svg.classList.remove('hidden');
-      }
-    }
-
-    document.getElementById('characterImageUpload').addEventListener('change', (event) => {
-      const file = event.target.files && event.target.files[0];
-      if (!file) return;
-      if (!file.type.startsWith('image/')) {
-        alert('Please choose an image file.');
-        return;
-      }
-      const reader = new FileReader();
-      reader.onload = () => {
-        uploadedCharacterImages[currentCharacterIndex] = reader.result;
-        showCharacterImage(currentCharacterIndex);
-        playSound('success');
-      };
-      reader.readAsDataURL(file);
-      event.target.value = '';
-    });
-
-    document.getElementById('resetCharacterImage').addEventListener('click', () => {
-      delete uploadedCharacterImages[currentCharacterIndex];
-      showCharacterImage(currentCharacterIndex);
-      playSound('click');
-    });
-
-    /* ===================================================================
-       APP BACKGROUND IMAGE UPLOAD
-       =================================================================== */
-    const bgInput = document.getElementById('bgImageUpload');
-    const backdropContainer = document.querySelector('div[aria-hidden="true"]');
-
-    bgInput.addEventListener('change', (event) => {
-      const file = event.target.files && event.target.files[0];
-      if (!file) return;
-      if (!file.type.startsWith('image/')) {
-        alert('Please select a valid image file for the background.');
-        return;
-      }
-      const reader = new FileReader();
-      reader.onload = () => {
-        backdropContainer.style.backgroundImage = `url('${reader.result}')`;
-        backdropContainer.style.backgroundSize = 'cover';
-        backdropContainer.style.backgroundPosition = 'center';
-        backdropContainer.style.backgroundRepeat = 'no-repeat';
-
-        Array.from(backdropContainer.children).forEach(child => {
-          child.style.opacity = '0';
-        });
-
-        playSound('success');
-      };
-      reader.readAsDataURL(file);
-      event.target.value = '';
-    });
-
-    function resetAppBackground() {
-      backdropContainer.style.backgroundImage = 'none';
-      Array.from(backdropContainer.children).forEach(child => {
-        child.style.opacity = '';
-      });
-      playSound('click');
     }
 
     /* ===================================================================
