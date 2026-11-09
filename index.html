@@ -8,7 +8,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Google Fonts: Fredoka & Plus Jakarta Sans for a playful, readable look -->
+  <!-- Google Fonts: Fredoka & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
@@ -45,7 +45,6 @@
   </script>
 
   <style>
-    /* Custom Cute Scrollbar */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #0f172a; }
     ::-webkit-scrollbar-thumb { background: #fbbf24; border-radius: 9999px; }
@@ -57,7 +56,6 @@
       box-shadow: 0 16px 38px rgba(0, 0, 0, 0.42), inset 0 0 22px rgba(251, 191, 36, 0.12);
     }
 
-    /* Pulse Mic Recording Effect */
     @keyframes pulse-mic {
       0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
       70% { transform: scale(1.08); box-shadow: 0 0 0 20px rgba(239, 68, 68, 0); }
@@ -68,16 +66,12 @@
       background: #ef4444 !important;
     }
 
-    /* Floating Animation for Chibi Mascot */
     @keyframes float-paimon {
       0%, 100% { transform: translateY(0px) rotate(0deg); }
       50% { transform: translateY(-8px) rotate(2deg); }
     }
-    .floating-mascot {
-      animation: float-paimon 3.5s ease-in-out infinite;
-    }
+    .floating-mascot { animation: float-paimon 3.5s ease-in-out infinite; }
 
-    /* Shimmer Gold Text */
     @keyframes text-shimmer {
       0% { background-position: -200% 0; }
       100% { background-position: 200% 0; }
@@ -92,7 +86,7 @@
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-genshin-gold selection:text-slate-900 overflow-x-hidden">
-  <!-- Original fantasy landscape backdrop: floating islands, mountains and a distant Mondstadt-inspired city -->
+  
   <div id="backdropContainer" aria-hidden="true" class="fixed inset-0 -z-10 overflow-hidden bg-[#101d35]">
     <div class="absolute inset-0 bg-gradient-to-b from-[#172d50] via-[#273d59] to-[#111827]"></div>
     <div class="absolute inset-0 opacity-60" style="background:radial-gradient(circle at 18% 18%,rgba(255,226,164,.42),transparent 23%),radial-gradient(circle at 82% 22%,rgba(126,190,210,.28),transparent 25%)"></div>
@@ -116,7 +110,7 @@
     <div class="absolute inset-0 bg-gradient-to-b from-slate-950/10 via-slate-950/15 to-slate-950/85"></div>
   </div>
 
-  <!-- ================= TOP BAR ================= -->
+  <!-- TOP BAR -->
   <header class="w-full bg-slate-900/90 border-b-2 border-genshin-gold/50 px-4 py-3 sticky top-0 z-50 backdrop-blur-md flex justify-between items-center shadow-lg">
     <div class="flex items-center space-x-3">
       <div class="w-11 h-11 rounded-full bg-genshin-gold flex items-center justify-center text-slate-950 font-chibi font-bold text-2xl shadow-chibi-glow">
@@ -128,9 +122,7 @@
       </div>
     </div>
 
-    <!-- Currency, Background & Sound Controls -->
     <div class="flex items-center space-x-2 md:space-x-3">
-      <!-- Background Picture Upload Controls -->
       <div class="flex items-center gap-1 bg-slate-800/90 border-2 border-amber-400/60 p-1 rounded-full shadow-md">
         <label for="bgImageUpload" class="px-2.5 py-1 rounded-full bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-chibi font-bold cursor-pointer transition flex items-center gap-1 shadow-sm">
           <i class="fa-solid fa-image"></i>
@@ -149,7 +141,6 @@
         <span class="hidden md:inline">Sound ON</span>
       </button>
 
-      <!-- Primogems Score -->
       <div class="flex items-center space-x-2 bg-slate-800 border-2 border-genshin-gold/70 px-4 py-1.5 rounded-full shadow-chibi-glow">
         <i class="fa-solid fa-gem text-cyan-400 text-base"></i>
         <span id="primoDisplay" class="text-base font-chibi font-bold gold-shimmer">0</span>
@@ -157,26 +148,20 @@
     </div>
   </header>
 
-  <!-- ================= MAIN CONTENT ================= -->
+  <!-- MAIN CONTENT -->
   <main class="container mx-auto px-4 py-5 flex-grow flex flex-col items-center justify-center max-w-6xl">
 
-    <!-- PAIMON MASCOT GUIDE BOX -->
     <div class="w-full max-w-4xl mb-5 chibi-panel rounded-3xl p-4 md:p-5 flex flex-col md:flex-row items-center gap-4 relative overflow-hidden">
-      <!-- Paimon Avatar SVG -->
       <div class="relative flex-shrink-0 floating-mascot">
         <div class="w-20 h-20 rounded-full border-4 border-genshin-gold overflow-hidden bg-gradient-to-b from-indigo-900 to-slate-900 flex items-center justify-center shadow-chibi-glow">
           <svg class="w-16 h-16" viewBox="0 0 100 100">
-            <!-- Chibi Paimon Head -->
-            <ellipse cx="50" cy="55" rx="30" ry="26" fill="#ffe4e6"/> <!-- Face -->
-            <path d="M 20 50 Q 50 15 80 50 Q 80 25 50 20 Q 20 25 20 50 Z" fill="#ffffff"/> <!-- White Hair -->
-            <!-- Halo Crown -->
+            <ellipse cx="50" cy="55" rx="30" ry="26" fill="#ffe4e6"/>
+            <path d="M 20 50 Q 50 15 80 50 Q 80 25 50 20 Q 20 25 20 50 Z" fill="#ffffff"/>
             <ellipse cx="50" cy="22" rx="28" ry="8" fill="none" stroke="#fbbf24" stroke-width="4"/>
-            <!-- Big Cute Eyes -->
             <ellipse cx="40" cy="52" rx="5" ry="7" fill="#1e1b4b"/>
             <ellipse cx="60" cy="52" rx="5" ry="7" fill="#1e1b4b"/>
             <circle cx="42" cy="50" r="2" fill="#ffffff"/>
             <circle cx="62" cy="50" r="2" fill="#ffffff"/>
-            <!-- Cheeks & Mouth -->
             <circle cx="33" cy="58" r="4" fill="#fda4af" opacity="0.7"/>
             <circle cx="67" cy="58" r="4" fill="#fda4af" opacity="0.7"/>
             <path d="M 46 62 Q 50 67 54 62" stroke="#f43f5e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
@@ -185,7 +170,6 @@
         <span class="absolute -bottom-1 -right-1 bg-genshin-paimon text-white text-[10px] font-chibi font-bold px-2 py-0.5 rounded-full border border-white">PAIMON</span>
       </div>
 
-      <!-- Speech Bubble Text -->
       <div class="flex-grow text-center md:text-left">
         <div class="inline-block px-3 py-1 rounded-full bg-amber-400/20 border border-amber-400/50 text-genshin-gold font-chibi text-xs font-bold mb-1">
           PAIMON'S SPEAKING TASK
@@ -196,38 +180,28 @@
       </div>
     </div>
 
-    <!-- MAIN GAME WORKSPACE GRID -->
     <div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-      <!-- LEFT: Chibi Character Card & Selector (5 cols) -->
       <div class="lg:col-span-5 flex flex-col items-center w-full">
 
-        <!-- Round Tabs for 10 Chibi Characters -->
-        <div class="flex gap-2 mb-3 w-full overflow-x-auto py-1 px-1 no-scrollbar scroll-smooth" id="characterTabsContainer">
-          <!-- Dynamic Tabs Loaded via JS -->
-        </div>
+        <div class="flex gap-2 mb-3 w-full overflow-x-auto py-1 px-1 no-scrollbar scroll-smooth" id="characterTabsContainer"></div>
 
-        <!-- Chibi Card Frame -->
         <div id="characterCard" class="w-full max-w-sm chibi-panel rounded-3xl p-5 flex flex-col items-center text-center relative transition-all duration-300">
           
-          <!-- Element Tag & Edit Toggle -->
           <div class="w-full flex justify-between items-center mb-3">
             <span id="charElementBadge" class="px-3 py-1 rounded-full text-xs font-chibi font-bold bg-red-500 text-white shadow-md flex items-center gap-1">
               <i class="fa-solid fa-fire"></i> PYRO
             </span>
             <div class="flex items-center gap-2">
               <span id="charNation" class="text-xs text-genshin-gold font-chibi font-bold tracking-wider">Mondstadt</span>
-              <button onclick="toggleCardEditor()" class="px-2 py-0.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-genshin-gold border border-genshin-gold/50 text-[10px] font-chibi transition" title="Edit character details">
+              <button onclick="toggleCardEditor()" class="px-2 py-0.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-genshin-gold border border-genshin-gold/50 text-[10px] font-chibi transition">
                 <i class="fa-solid fa-pen-to-square"></i> Edit Card
               </button>
             </div>
           </div>
 
-          <!-- SVG Visual Display Box -->
           <div class="relative w-56 h-56 rounded-2xl overflow-hidden mb-3 border-4 border-genshin-gold/60 bg-gradient-to-b from-slate-800 to-slate-900 flex items-center justify-center shadow-inner group">
-            <svg id="charSvg" class="w-full h-full p-2" viewBox="0 0 200 200">
-              <!-- Original chibi illustration shown until a photo is uploaded -->
-            </svg>
+            <svg id="charSvg" class="w-full h-full p-2" viewBox="0 0 200 200"></svg>
             <img id="characterPhoto" alt="Selected character" class="hidden absolute inset-0 w-full h-full object-contain bg-slate-900/40 p-2" />
 
             <div class="absolute bottom-2 left-2 right-2 text-center">
@@ -247,12 +221,10 @@
             </button>
           </div>
 
-          <!-- Character Display Info -->
           <h2 id="charName" class="font-chibi text-2xl font-bold text-genshin-gold tracking-wide">Chibi Klee</h2>
           <p id="charTitle" class="text-xs text-slate-300 font-semibold mb-1">The Spark Knight</p>
           <p class="text-[10px] text-slate-400 font-semibold mb-3">Teacher tip: upload a character picture or edit text to customize!</p>
 
-          <!-- INLINE CARD EDITOR PANEL (Hidden by Default) -->
           <div id="cardEditorForm" class="w-full bg-slate-900/95 border-2 border-amber-400/80 rounded-2xl p-3.5 mb-3 text-left hidden space-y-2.5">
             <div class="flex justify-between items-center border-b border-slate-700 pb-1.5">
               <span class="text-xs font-chibi font-bold text-genshin-gold"><i class="fa-solid fa-sliders"></i> EDIT CHARACTER DETAILS</span>
@@ -290,23 +262,18 @@
             </button>
           </div>
 
-          <!-- Easy A1 Target Vocabulary Hints -->
           <div class="w-full bg-slate-900/90 rounded-2xl p-3 border-2 border-slate-800 text-left">
             <p class="text-xs font-chibi font-bold text-genshin-gold mb-2 flex items-center gap-1">
               <i class="fa-solid fa-magnifying-glass"></i> CLUES TO DESCRIBE:
             </p>
-            <div id="traitBadgeContainer" class="flex flex-wrap gap-1.5">
-              <!-- Easy Clue Badges -->
-            </div>
+            <div id="traitBadgeContainer" class="flex flex-wrap gap-1.5"></div>
           </div>
 
         </div>
       </div>
 
-      <!-- RIGHT: Interactive Speaking Stage & Feedback (7 cols) -->
       <div class="lg:col-span-7 flex flex-col space-y-4 w-full">
 
-        <!-- EASY A1 SENTENCE STARTERS -->
         <div class="chibi-panel rounded-3xl p-4">
           <div class="flex items-center justify-between mb-2">
             <h3 class="font-chibi text-sm font-bold text-genshin-gold flex items-center gap-2">
@@ -331,17 +298,13 @@
           </div>
         </div>
 
-        <!-- WORD BANK QUICK-PILLS (A1 Vocabulary) -->
         <div class="chibi-panel rounded-3xl p-4">
           <h3 class="font-chibi text-sm font-bold text-genshin-gold mb-2 flex items-center gap-2">
             <i class="fa-solid fa-book-open text-cyan-400"></i> STEP 2: EASY WORD BANK
           </h3>
-          <div id="wordBankContainer" class="flex flex-wrap gap-1.5">
-            <!-- Word pills dynamically generated -->
-          </div>
+          <div id="wordBankContainer" class="flex flex-wrap gap-1.5"></div>
         </div>
 
-        <!-- MICROPHONE & TRANSCRIPT AREA -->
         <div class="chibi-panel rounded-3xl p-5 flex flex-col items-center">
           
           <div class="w-full flex items-center justify-between mb-3">
@@ -351,7 +314,6 @@
             </span>
           </div>
 
-          <!-- Big Pulse Mic Button -->
           <div class="flex flex-col items-center my-2">
             <button id="micBtn" onclick="toggleSpeechRecognition()" class="w-20 h-20 rounded-full bg-genshin-gold hover:bg-genshin-goldHover text-slate-950 text-3xl font-bold shadow-chibi-glow flex items-center justify-center transition transform active:scale-95">
               <i id="micIcon" class="fa-solid fa-microphone"></i>
@@ -361,7 +323,6 @@
             </p>
           </div>
 
-          <!-- Transcript Input Box -->
           <div class="w-full mt-3">
             <div class="relative">
               <textarea id="speechTextInput" rows="2" class="w-full bg-slate-900 border-2 border-slate-700 rounded-2xl p-3 text-base font-chibi text-slate-100 placeholder-slate-500 focus:outline-none focus:border-genshin-gold transition resize-none" placeholder="Your spoken sentence will show here (or type here)..."></textarea>
@@ -371,26 +332,20 @@
             </div>
           </div>
 
-          <!-- Check Answer Button -->
           <button id="evaluateBtn" onclick="evaluateSpeech()" class="mt-4 w-full py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-chibi font-bold text-lg tracking-wide shadow-chibi-glow transition transform active:scale-98 flex items-center justify-center gap-2">
             <i class="fa-solid fa-circle-check text-xl"></i> CHECK MY SENTENCE!
           </button>
         </div>
 
-        <!-- FEEDBACK & REWARD BANNER -->
         <div id="evaluationResultPanel" class="chibi-panel rounded-3xl p-5 hidden transition-all duration-300">
           <h4 class="font-chibi text-base font-bold text-genshin-gold mb-2 flex items-center gap-2">
             <i class="fa-solid fa-star text-amber-400"></i> PAIMON'S EVALUATION:
           </h4>
 
-          <div id="detectedKeywordsContainer" class="flex flex-wrap gap-2 mb-3">
-            <!-- Detected keywords tags -->
-          </div>
+          <div id="detectedKeywordsContainer" class="flex flex-wrap gap-2 mb-3"></div>
 
           <div class="bg-slate-900/90 rounded-2xl p-3 border-2 border-slate-800 mb-4">
-            <p id="structureFeedback" class="text-sm font-chibi text-slate-200">
-              <!-- Feedback message -->
-            </p>
+            <p id="structureFeedback" class="text-sm font-chibi text-slate-200"></p>
           </div>
 
           <div id="rewardBanner" class="p-3.5 rounded-2xl bg-amber-400/20 border-2 border-amber-400/50 flex items-center justify-between">
@@ -412,7 +367,7 @@
 
   </main>
 
-  <!-- ================= ADVENTURER CERTIFICATE MODAL ================= -->
+  <!-- ADVENTURER CERTIFICATE MODAL -->
   <div id="reportModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
     <div class="chibi-panel rounded-3xl max-w-xl w-full p-6 relative">
       <button onclick="closeReportModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">
@@ -458,7 +413,7 @@
     </div>
   </div>
 
-  <!-- ================= FOOTER ================= -->
+  <!-- FOOTER -->
   <footer class="w-full bg-slate-900/90 border-t-2 border-genshin-gold/40 py-2.5 px-4 backdrop-blur-md flex justify-between items-center text-xs font-chibi text-slate-300">
     <div class="flex items-center space-x-2">
       <i class="fa-solid fa-face-smile text-genshin-gold"></i>
@@ -469,11 +424,8 @@
     </button>
   </footer>
 
-  <!-- ================= GAME ENGINE SCRIPT ================= -->
+  <!-- SCRIPT WITH FULL IMAGE CANVAS COMPRESSION FOR LOCALSTORAGE -->
   <script>
-    /* ===================================================================
-       1. 10 CHIBI CHARACTERS DATA (A1 Level Words for 11-Year-Olds)
-       =================================================================== */
     const defaultCharacters = [
       {
         id: 'klee',
@@ -750,7 +702,48 @@
     ];
 
     /* ===================================================================
-       2. LOCALSTORAGE & GLOBAL STATE
+       IMAGE CANVAS COMPRESSOR (Prevents Storage Quota Exceeded)
+       =================================================================== */
+    function compressAndSaveImage(file, maxWidth, quality, storageKey, callback) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+
+          if (width > maxWidth) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+
+          // Convert to small JPG Data URL (Under 150-200 KB)
+          const compressedBase64 = canvas.toDataURL('image/jpeg', quality);
+
+          try {
+            if (storageKey) {
+              localStorage.setItem(storageKey, compressedBase64);
+            }
+            callback(compressedBase64);
+          } catch (err) {
+            console.error("LocalStorage save error:", err);
+            alert("Storage full! Please clear browser cache or use a smaller image file.");
+          }
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    /* ===================================================================
+       LOCALSTORAGE STATE & APP INIT
        =================================================================== */
     let characters = JSON.parse(localStorage.getItem('teyvat_guild_char_data')) || defaultCharacters;
     let uploadedCharacterImages = JSON.parse(localStorage.getItem('teyvat_guild_char_photos')) || {};
@@ -767,30 +760,22 @@
     let roundsPlayed = 0;
 
     /* ===================================================================
-       3. WEB AUDIO SYNTHESIZER
+       WEB AUDIO SYNTHESIZER
        =================================================================== */
     let audioCtx = null;
 
     function getAudioContext() {
       const AudioContextClass = window.AudioContext || window.webkitAudioContext;
       if (!AudioContextClass) return null;
-
-      if (!audioCtx) {
-        audioCtx = new AudioContextClass();
-      }
-
+      if (!audioCtx) audioCtx = new AudioContextClass();
       if (audioCtx.state === 'suspended') {
-        audioCtx.resume().catch((error) => {
-          console.warn('Audio could not be resumed:', error);
-        });
+        audioCtx.resume().catch((error) => console.warn('Audio unlock warning:', error));
       }
-
       return audioCtx;
     }
 
     function playSound(type) {
       if (!isAudioEnabled) return;
-
       const ctx = getAudioContext();
       if (!ctx) return;
 
@@ -837,7 +822,7 @@
     }
 
     /* ===================================================================
-       4. SETUP & RENDER TABS
+       SETUP & RENDER TABS
        =================================================================== */
     window.addEventListener('DOMContentLoaded', () => {
       loadSavedAppBackground();
@@ -904,13 +889,11 @@
     }
 
     /* ===================================================================
-       PERSISTENT LOCALSTORAGE BACKGROUND & CHARACTER IMAGES
+       COMPRESSED LOCALSTORAGE BACKGROUND & CHARACTER IMAGES
        =================================================================== */
     function loadSavedAppBackground() {
       const savedBg = localStorage.getItem('teyvat_guild_app_bg');
-      if (savedBg) {
-        applyAppBackground(savedBg);
-      }
+      if (savedBg) applyAppBackground(savedBg);
     }
 
     const bgInput = document.getElementById('bgImageUpload');
@@ -920,17 +903,15 @@
       const file = event.target.files && event.target.files[0];
       if (!file) return;
       if (!file.type.startsWith('image/')) {
-        alert('Please select a valid image file for the background.');
+        alert('Please select a valid image file.');
         return;
       }
-      const reader = new FileReader();
-      reader.onload = () => {
-        const base64Image = reader.result;
-        applyAppBackground(base64Image);
-        localStorage.setItem('teyvat_guild_app_bg', base64Image);
+      
+      // Compress to Max 1080px width, 70% quality (Web-Optimized)
+      compressAndSaveImage(file, 1080, 0.70, 'teyvat_guild_app_bg', (compressedData) => {
+        applyAppBackground(compressedData);
         playSound('success');
-      };
-      reader.readAsDataURL(file);
+      });
       event.target.value = '';
     });
 
@@ -939,16 +920,12 @@
       backdropContainer.style.backgroundSize = 'cover';
       backdropContainer.style.backgroundPosition = 'center';
       backdropContainer.style.backgroundRepeat = 'no-repeat';
-      Array.from(backdropContainer.children).forEach(child => {
-        child.style.opacity = '0';
-      });
+      Array.from(backdropContainer.children).forEach(child => child.style.opacity = '0');
     }
 
     function resetAppBackground() {
       backdropContainer.style.backgroundImage = 'none';
-      Array.from(backdropContainer.children).forEach(child => {
-        child.style.opacity = '';
-      });
+      Array.from(backdropContainer.children).forEach(child => child.style.opacity = '');
       localStorage.removeItem('teyvat_guild_app_bg');
       playSound('click');
     }
@@ -973,18 +950,17 @@
       const file = event.target.files && event.target.files[0];
       if (!file) return;
       if (!file.type.startsWith('image/')) {
-        alert('Please choose an image file.');
+        alert('Please select an image file.');
         return;
       }
-      const reader = new FileReader();
-      reader.onload = () => {
-        const base64Image = reader.result;
-        uploadedCharacterImages[currentCharacterIndex] = base64Image;
+
+      // Compress Character Card Photos (Max 500px width)
+      compressAndSaveImage(file, 500, 0.75, null, (compressedData) => {
+        uploadedCharacterImages[currentCharacterIndex] = compressedData;
         localStorage.setItem('teyvat_guild_char_photos', JSON.stringify(uploadedCharacterImages));
         showCharacterImage(currentCharacterIndex);
         playSound('success');
-      };
-      reader.readAsDataURL(file);
+      });
       event.target.value = '';
     });
 
@@ -996,14 +972,12 @@
     });
 
     /* ===================================================================
-       CARD EDITING FUNCTIONS (SAVED TO LOCALSTORAGE)
+       CARD EDITING FUNCTIONS (PERSISTED TO LOCALSTORAGE)
        =================================================================== */
     function toggleCardEditor() {
       playSound('click');
       const form = document.getElementById('cardEditorForm');
-      const isHidden = form.classList.contains('hidden');
-      
-      if (isHidden) {
+      if (form.classList.contains('hidden')) {
         const char = characters[currentCharacterIndex];
         document.getElementById('editNameInput').value = char.name;
         document.getElementById('editTitleInput').value = char.title;
@@ -1046,7 +1020,7 @@
     }
 
     /* ===================================================================
-       5. SPEECH ENGINE & INPUT HELPERS
+       SPEECH ENGINE & INPUT HELPERS
        =================================================================== */
     function initSpeechRecognition() {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -1080,14 +1054,12 @@
         document.getElementById('speechTextInput').value = transcript;
       };
 
-      recognition.onend = () => {
-        stopRecording();
-      };
+      recognition.onend = () => { stopRecording(); };
     }
 
     function toggleSpeechRecognition() {
       if (!recognition) {
-        alert("Speech input isn't supported on this browser. You can type your sentence in the box!");
+        alert("Type your sentence into the input box below!");
         return;
       }
       if (isRecording) {
@@ -1126,7 +1098,7 @@
     }
 
     /* ===================================================================
-       6. EVALUATION ENGINE (A1 Speaking Standard LS 2.1.5)
+       EVALUATION ENGINE (A1 Speaking Standard LS 2.1.5)
        =================================================================== */
     function evaluateSpeech() {
       const char = characters[currentCharacterIndex];
@@ -1137,11 +1109,9 @@
         return;
       }
 
-      // Check A1 Sentence Starters
       const validStarters = ['she has', 'he has', 'she is wearing', 'he is wearing', 'she looks', 'he looks', 'they look', 'is wearing', 'has'];
       const hasStructure = validStarters.some(s => text.includes(s));
 
-      // Match clues
       let matchedCluesCount = 0;
       const detectedBadges = char.clues.map(clue => {
         const isMatched = text.includes(clue) || clue.split(' ').some(w => text.includes(w));
@@ -1158,7 +1128,6 @@
       primogems += earnedPrimos;
       document.getElementById('primoDisplay').textContent = primogems;
 
-      // Render Feedback
       const evalPanel = document.getElementById('evaluationResultPanel');
       evalPanel.classList.remove('hidden');
 
@@ -1191,7 +1160,7 @@
     }
 
     /* ===================================================================
-       7. CERTIFICATE MODAL
+       CERTIFICATE MODAL
        =================================================================== */
     function openReportModal() {
       playSound('click');
